@@ -7,6 +7,7 @@ import RoomsDetails from '../pages/RoomsDetails/RoomsDetails'
 import { createBrowserRouter } from 'react-router-dom'
 import DashboardLayout from '../Layout/DashboardLayout'
 import AddRoom from '../pages/Dashboard/AddRoom'
+import { getAllRoom } from '../api/rooms'
 // import DashboardLayout from '../Layout/DashboardLayout'
 // import AddRoom from '../pages/DashboardPage/AddRoom'
 
@@ -23,11 +24,16 @@ export const router = createBrowserRouter([
     },
     {
       path: '/room/:id',
-      element:<RoomsDetails></RoomsDetails> ,
-    }
+      element:(<RoomsDetails></RoomsDetails> ),
+      loader:({params})=>getAllRoom(params.id),
+
+    },
+  
 
     ]
   },
+
+
   {
     path: '/login',
     element:<Login></Login> ,

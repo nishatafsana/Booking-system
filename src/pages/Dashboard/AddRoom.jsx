@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import AddRoomForm from "../../component/Forms/AddRoomForm";
 import { imageUpload } from "../../api/utils";
 import { AuthContext } from "../../component/Authprovider/AuthProvider";
+import { addRoom } from "../../api/rooms";
 
 const AddRoom = () => {
   // server site a data pathanu..
@@ -22,7 +23,7 @@ const AddRoom = () => {
  const location=event.target.location.value;
  const title=event.target.title.value;
  const price=event.target.price.value;
- const total_guest=event.target.total_guest.value;
+ const guests=event.target.total_guest.value;
  const bedrooms=event.target.bedrooms.value;
  const bathrooms=event.target.bathrooms.value;
  const description=event.target.description.value;
@@ -41,7 +42,7 @@ const roomData={
   from,
   to,
   price:parseFloat(price),
-  total_guest,
+  guests,
   bedrooms,
   bathrooms,
   description,
@@ -52,7 +53,11 @@ const roomData={
   },
   category,
 }
-console.log(roomData)
+// fetch room data..
+addRoom(roomData)
+.then(data=>console.log(data))
+.catch(err=>console.log(err))
+
   setLoading(false)
 })
 .catch(err=>{
