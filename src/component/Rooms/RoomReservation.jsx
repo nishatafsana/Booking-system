@@ -7,11 +7,13 @@ import { useContext, useState } from 'react'
 import BookingModal from '../Modal/BookingModal'
 import { formatDistance } from 'date-fns'
 import { key } from 'localforage'
-import { addBooking, updateStatus } from '../../api/booking'
+import { addBooking, updateStatus,  } from '../../api/booking'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const RoomReservation = ({roomData}) => {
-  console.log(roomData)
+  const navigate=useNavigate()
+  // console.log(roomData)
   const[isOpen,setIsOpen]=useState(false)
   const closeModal =()=>{
     setIsOpen(false)
@@ -41,13 +43,15 @@ roomId:roomData._id
 
 
   })
-  console.log(bookingInfo)
+  // console.log(bookingInfo)
   const handleSelect=(ranges)=>{
     setValue({...value})
   }
+
   const modalHandler=()=>{
     addBooking(bookingInfo)
     .then(data=>{
+      console.log(data)
       updateStatus(roomData._id,true)
       .then(data=>{
         console.log(data)
@@ -55,7 +59,7 @@ roomId:roomData._id
         navigate('/dashboard/my-bookings')
         closeModal()
       })
-      
+      .catch(err=>console.log(err))
     })
     .catch(err=>{
       console.log(err)

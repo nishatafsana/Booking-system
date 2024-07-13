@@ -8,6 +8,9 @@ import { createBrowserRouter } from 'react-router-dom'
 import DashboardLayout from '../Layout/DashboardLayout'
 import AddRoom from '../pages/Dashboard/AddRoom'
 import { getAllRoom } from '../api/rooms'
+import PrivateRoute from './PrivateRoute'
+import MyBookings from '../pages/Dashboard/MyBookings'
+import MyListings from '../pages/Dashboard/MyListings'
 // import DashboardLayout from '../Layout/DashboardLayout'
 // import AddRoom from '../pages/DashboardPage/AddRoom'
 
@@ -44,11 +47,27 @@ export const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+      <DashboardLayout></DashboardLayout>,
+    </PrivateRoute>
+    ),
     children:[
+      {
+        path: '/dashboard/',
+        element:<MyBookings></MyBookings>
+      },
       {
         path: '/dashboard/add-room',
         element:<AddRoom></AddRoom>
+      },
+      {
+        path: '/dashboard/my-bookings',
+        element:<MyBookings></MyBookings>
+      },
+      {
+        path: '/dashboard/my-listings',
+        element:<MyListings></MyListings>
       },
      
   
