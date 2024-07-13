@@ -9,7 +9,7 @@ const AddRoom = () => {
   const {user}=useContext(AuthContext)
   // state change..
   const[loading,setLoading]=useState(false)
-  const[uploadButtonText,setUploadButtonText]=useState('hero')
+  const[uploadButtonText,setUploadButtonText]=useState('Upload Image')
   const[dates,setDates]=useState( {
     startDate: new Date(),
     endDate: new Date(),
